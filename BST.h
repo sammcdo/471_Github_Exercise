@@ -42,7 +42,7 @@ public:
   //since you would have to change clearhelp() to make it work with
   //doubly-threaded trees and that is not part of the assignment.
   //~BST() { clearhelp(root); }            // Destructor
-
+  void printPreOrder(BSTNode<Key, E>* root, int level) const;
   void clear()   // Reinitialize tree
     { clearhelp(root); root = NULL; nodecount = 0; }
 
@@ -203,6 +203,18 @@ printhelp(BSTNode<Key, E>* root, int level) const {
 
 
 template <typename Key, typename E>
+void BST<Key, E>::printPreOrder(BSTNode<Key, E>* root, int level) const
+ {
+  	
+  if (root == NULL) return;           // Empty tree
+  visit(root);
+  printhelp(root->left(), level+1);   // Do left subtree
+  					  // Print node value
+  printhelp(root->right(), level+1);  // Do right subtree
+}
+
+
+template <typename Key, typename E>
 void BST<Key, E>::
 printPostOrder(BSTNode<Key, E>* root, int level) const {
   if (root == NULL) return;                // Empty tree
@@ -210,3 +222,4 @@ printPostOrder(BSTNode<Key, E>* root, int level) const {
   printPostOrder(root->right(), level+1);  // Do right subtree
   visit(root);	               					   // Print node value
 }
+
